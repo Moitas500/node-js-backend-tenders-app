@@ -1,14 +1,16 @@
 import { UserRepository } from "../../core/repositories/users.repository.js"
 
 export const getUsers = async (req, res) => {
-    try {
-        const response = await UserRepository.listUsers()
-        res.status(200).json(response)
-    } catch (error) {
-        res.status(500).json({
-            message: error
-        })
-    }
+    await UserRepository.listUsers((err, rows) => {
+        if (err) { 
+            console.log(err)
+            res.status(500).json({
+                message: error
+            })
+        } else {
+            res.status(200).json(rows)
+        }
+    })
 }
 
 export const createUser = async (req, res) => {

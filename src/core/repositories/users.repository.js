@@ -4,8 +4,8 @@ const TABLE_NAME = 'users';
 
 export class UserRepository {
 
-    static async listUsers() {
-        return BaseRepository.dbSelectAll(TABLE_NAME)
+    static listUsers(callback) {
+        return BaseRepository.dbSelectAll(TABLE_NAME, callback)
     }
 
     static async createUser( user ) {

@@ -7,8 +7,8 @@ export class BaseRepository {
 		return query.replace(/\s+/g, ' ')
 	}
 
-    static async dbSelectAll(tableName) {
-		return dbClient.run(`SELECT * FROM ${tableName}`).then(it => it.rows)
+    static async dbSelectAll(tableName, callback) {
+		dbClient.all(`SELECT * FROM ${tableName}`, callback)
 	}
 
     static async dbInsert(tableName, values) {
