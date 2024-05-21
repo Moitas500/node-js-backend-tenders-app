@@ -14,4 +14,14 @@ export class SalesRepository {
         })
     }
 
+    static async updateSale(qty, id) {
+        return BaseRepository.dbUpdateTable(TABLE_NAME, 
+           {
+                'qty = ?' : qty
+           },
+           {
+                'id = ?' : id
+           }
+        )
+    }
 }

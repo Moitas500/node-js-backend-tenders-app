@@ -25,6 +25,23 @@ export const createSale = async (req, res) => {
     })
 }
 
+export const updateSale = async (req, res) => {
+    await SalesRepository.updateSale(
+        req.body.qty,
+        req.body.id
+    )
+    .then( () => {
+        res.status(201).json({
+            message: 'Sale updated'
+        })
+    })
+    .catch( (error) => {
+        res.status(500).json({
+            message: error
+        })
+    })
+}
+
 function isValidDate(dateString) {
     const dateObject = new Date(dateString);
     return !isNaN(dateObject.getTime()) && dateString === dateObject.toISOString().split('T')[0];
