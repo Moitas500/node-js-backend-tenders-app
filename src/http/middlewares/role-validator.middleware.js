@@ -1,13 +1,9 @@
-const HEADER_NAME = 'auth'
+import { HEADER_NAME } from "../../core/consts/const.js"
 
 export const roleValidator = (allowedRoles) => {
 	return (req, res, next) => {
 		
-		const role =  req.headers[HEADER_NAME]
-
-		if (!role) return res.status(401).send('Se requiere encabezado de autorización')
-
-		if (allowedRoles.includes(role)) {
+		if (allowedRoles.includes(req.headers[HEADER_NAME])) {
 			return next()
 		}
 
