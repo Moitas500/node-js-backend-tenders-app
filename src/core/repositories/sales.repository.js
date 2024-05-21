@@ -4,6 +4,12 @@ const TABLE_NAME = 'sales';
 
 export class SalesRepository {
     
+    static deleteSale(id) {
+        return BaseRepository.dbDelete(TABLE_NAME, {
+            'id = ?': id
+        })
+    }
+
     static async createSale(sale) {
         return BaseRepository.dbInsert(TABLE_NAME, {
             id: sale.id,

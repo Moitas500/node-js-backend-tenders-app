@@ -25,6 +25,22 @@ export const createSale = async (req, res) => {
     })
 }
 
+export const deleteSale = async (req, res) => {
+    await SalesRepository.deleteSale(
+        req.params.id
+    )
+    .then( () => {
+        res.status(201).json({
+            message: 'Sale deleted'
+        })
+    })
+    .catch( (error) => {
+        res.status(500).json({
+            message: error
+        })
+    })
+}
+
 export const updateSale = async (req, res) => {
     await SalesRepository.updateSale(
         req.body.qty,
