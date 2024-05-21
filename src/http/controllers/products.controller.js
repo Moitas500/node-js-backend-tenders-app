@@ -18,3 +18,16 @@ export const createProduct = async (req, res) => {
         })
     })
 }
+
+export const getProducts = async (req, res) => {
+    await ProductsRepository.listProducts((err, rows) => {
+        if (err) { 
+            console.log(err)
+            res.status(500).json({
+                message: error
+            })
+        } else {
+            res.status(200).json(rows)
+        }
+    })
+}

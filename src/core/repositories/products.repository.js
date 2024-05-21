@@ -13,4 +13,8 @@ export class ProductsRepository {
         })
     }
 
+    static async listProducts(callback) {
+        return BaseRepository.dbSelectAll(TABLE_NAME, callback)
+    }
+
 }
