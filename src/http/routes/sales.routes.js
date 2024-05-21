@@ -5,6 +5,7 @@ import {
     createSale, 
     deleteSale, 
     getSales, 
+    getSalesInADay, 
     updateSale 
 } from '../controllers/sales.controller.js'
 
@@ -12,6 +13,11 @@ const router = express.Router()
 
 router.get('/',
     getSales
+)
+
+router.get('/day/:date',
+    roleValidator([Role.ADMIN]),
+    getSalesInADay
 )
 
 router.post('/create-sale',

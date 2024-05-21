@@ -1,6 +1,5 @@
 import dbClient from "../../config/db-client.js";
 
-
 export class BaseRepository {
 
     static trimQuery(query) {

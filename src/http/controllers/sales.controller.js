@@ -1,7 +1,7 @@
 import { SalesRepository } from "../../core/repositories/sales.repository.js"
 
 export const getSales = async (req, res) => {
-    await SalesRepository.listUsers((err, rows) => {
+    await SalesRepository.listSales((err, rows) => {
         if (err) { 
             console.log(err)
             res.status(500).json({
@@ -11,6 +11,23 @@ export const getSales = async (req, res) => {
             res.status(200).json(rows)
         }
     })
+}
+
+export const getSalesInADay = async (req, res) => {
+    await SalesRepository.listSalesInADay((err, rows) => {
+            if (err) { 
+                console.log(err)
+                res.status(500).json({
+                    message: error
+                })
+            } else {
+                res.status(200).json(
+                    calculateSells(rows)
+                )
+            }
+        },
+        req.params.date
+    )
 }
 
 export const createSale = async (req, res) => {
@@ -74,4 +91,8 @@ export const updateSale = async (req, res) => {
 function isValidDate(dateString) {
     const dateObject = new Date(dateString);
     return !isNaN(dateObject.getTime()) && dateString === dateObject.toISOString().split('T')[0];
+}
+
+function calculateSells(sales) {
+    return sales.reduce((acc, item) => acc + (item.price * item.qty), 0)
 }
