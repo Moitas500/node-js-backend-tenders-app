@@ -6,6 +6,7 @@ import {
     deleteSale, 
     getSales, 
     getSalesInADay, 
+    getSalesInAMonth, 
     updateSale 
 } from '../controllers/sales.controller.js'
 
@@ -18,6 +19,12 @@ router.get('/',
 router.get('/day/:date',
     roleValidator([Role.ADMIN]),
     getSalesInADay
+)
+
+//:date like 2024-01
+router.get('/month/:date',
+    roleValidator([Role.ADMIN]),
+    getSalesInAMonth
 )
 
 router.post('/create-sale',

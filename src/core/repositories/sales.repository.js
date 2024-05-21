@@ -18,6 +18,15 @@ export class SalesRepository {
         `, [sale_at], callback)
     }
 
+    static listSalesInAMonth(callback, month) {
+        return dbClient.all(`
+            SELECT S.id, S.qty, P.price
+            FROM sales S
+            JOIN products P ON P.id = S.products_id
+            WHERE strftime('%Y-%m', S.sale_at) = ?
+        `, [month], callback)
+    }
+
     static deleteSale(id) {
         return BaseRepository.dbDelete(TABLE_NAME, {
             'id = ?': id

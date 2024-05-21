@@ -18,7 +18,24 @@ export const getSalesInADay = async (req, res) => {
             if (err) { 
                 console.log(err)
                 res.status(500).json({
-                    message: error
+                    message: err
+                })
+            } else {
+                res.status(200).json(
+                    calculateSells(rows)
+                )
+            }
+        },
+        req.params.date
+    )
+}
+
+export const getSalesInAMonth = async (req, res) => {
+    await SalesRepository.listSalesInAMonth((err, rows) => {
+            if (err) { 
+                console.log(err)
+                res.status(500).json({
+                    message: err
                 })
             } else {
                 res.status(200).json(
