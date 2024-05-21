@@ -21,4 +21,15 @@ export class BaseRepository {
         Object.values(values),
         (error) => console.error(error))
     }
+
+    static async dbDelete(tableName, conditions) {
+        return dbClient.run(
+            BaseRepository.trimQuery(`
+                DELETE FROM ${tableName}
+                WHERE ${Object.keys(conditions).join('AND')}
+            `),
+            Object.values(conditions),
+            (error) => console.error(error)
+        )
+    }
 }

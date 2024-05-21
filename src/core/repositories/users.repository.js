@@ -4,6 +4,12 @@ const TABLE_NAME = 'users';
 
 export class UserRepository {
 
+    static deleteUser( id ) {
+        return BaseRepository.dbDelete(TABLE_NAME, {
+            'id = ?': id
+        })
+    }
+
     static listUsers(callback) {
         return BaseRepository.dbSelectAll(TABLE_NAME, callback)
     }

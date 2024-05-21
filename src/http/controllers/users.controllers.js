@@ -13,6 +13,22 @@ export const getUsers = async (req, res) => {
     })
 }
 
+export const deleteUser = async (req, res) => {
+    await UserRepository.deleteUser(
+        req.params.id
+    )
+        .then( () => {
+            res.status(201).json({
+                message: 'User deleted'
+            })
+        })
+        .catch( (error) => {
+            res.status(500).json({
+                message: error
+            })
+        })
+}
+
 export const createUser = async (req, res) => {
     await UserRepository.createUser({
         id: req.body.id,
