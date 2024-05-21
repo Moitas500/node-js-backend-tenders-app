@@ -18,6 +18,7 @@ export class BaseRepository {
             INSERT INTO ${tableName} (${columnNames.join(',')})
             VALUES (${columnNames.map((_) => '?').join(',')})
         `),
-        Object.values(values))
+        Object.values(values),
+        (error) => console.error(error))
     }
 }
