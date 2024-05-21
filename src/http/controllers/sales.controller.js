@@ -1,5 +1,18 @@
 import { SalesRepository } from "../../core/repositories/sales.repository.js"
 
+export const getSales = async (req, res) => {
+    await SalesRepository.listUsers((err, rows) => {
+        if (err) { 
+            console.log(err)
+            res.status(500).json({
+                message: error
+            })
+        } else {
+            res.status(200).json(rows)
+        }
+    })
+}
+
 export const createSale = async (req, res) => {
 
     if (!isValidDate(req.body.sale_at)) {

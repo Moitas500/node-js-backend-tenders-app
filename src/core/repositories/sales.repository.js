@@ -4,6 +4,10 @@ const TABLE_NAME = 'sales';
 
 export class SalesRepository {
     
+    static listUsers(callback) {
+        return BaseRepository.dbSelectAll(TABLE_NAME, callback)
+    }
+
     static deleteSale(id) {
         return BaseRepository.dbDelete(TABLE_NAME, {
             'id = ?': id

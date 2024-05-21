@@ -4,10 +4,15 @@ import { Role } from '../../core/domain/role.js'
 import { 
     createSale, 
     deleteSale, 
+    getSales, 
     updateSale 
 } from '../controllers/sales.controller.js'
 
 const router = express.Router()
+
+router.get('/',
+    getSales
+)
 
 router.post('/create-sale',
     createSale
