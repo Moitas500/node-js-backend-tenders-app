@@ -32,4 +32,25 @@ export class BaseRepository {
             (error) => console.error(error)
         )
     }
+
+    static async dbUpdateTable(tableName, colums, conditions) {
+        console.log(
+            BaseRepository.trimQuery(`
+                UPDATE ${tableName}
+                SET ${Object.keys(colums).join(', ')}
+                WHERE ${Object.keys(conditions).join(' AND ')}
+            `),
+            [...Object.values(colums), ...Object.values(conditions)],
+        )
+
+        return dbClient.run(
+            BaseRepository.trimQuery(`
+                UPDATE ${tableName}
+                SET ${Object.keys(colums).join(', ')}
+                WHERE ${Object.keys(conditions).join(' AND ')}
+            `),
+            [...Object.values(colums), ...Object.values(conditions)],
+            (error) => console.error(error)
+        )
+    }
 }
